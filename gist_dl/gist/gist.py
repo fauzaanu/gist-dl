@@ -1,5 +1,5 @@
 import typer
-from github.gh import GithubClient
+from gist_dl.github.gh import GithubClient
 
 
 class Gist:
@@ -8,14 +8,10 @@ class Gist:
 
     def greeting(self):
         typer.echo("Welcome to Gist CLI")
-        typer.echo("Usage:")
-
-        typer.echo("Listing all gists of a user")
-        typer.echo("gist <username>")
-        typer.echo("Example: gist fauzaanu")
+        typer.echo("Enter a github username to get started")
 
     def get_command(self):
-        return typer.prompt("Enter a command: ")
+        return typer.prompt("Enter a Username: ")
 
     def list_all_gists(self, username):
         client = GithubClient()
@@ -64,17 +60,15 @@ class Gist:
         typer.echo("File downloaded")
 
     def process_command(self, command):
-        if command[0] == "gist":
+        if len(command) == 1:
+            username = command[0]
+            self.list_all_gists(username)
 
-            if len(command) == 2:
-                username = command[1]
-                self.list_all_gists(username)
-
-            # elif len(command) == 3:
-            # TODO: implement this
-            #     username = command[1]
-            #     filename = command[2]
-            #     self.list_specific_gist(username, filename)
-            # This comment is for the people on twitter who said not to write TODOs in code comments
-            else:
-                typer.echo("Invalid command")
+        # elif len(command) == 3:
+        # TODO: implement this
+        #     username = command[1]
+        #     filename = command[2]
+        #     self.list_specific_gist(username, filename)
+        # This comment is for the people on twitter who said not to write TODOs in code comments
+        else:
+            typer.echo("Invalid command")

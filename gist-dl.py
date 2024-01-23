@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import typer
-from gist.gist import Gist
+from gist_dl.gist.gist import Gist
 
 
 def main():
